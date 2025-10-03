@@ -80,7 +80,7 @@ class CounterGame {
 
     updateDisplay() {
         this.counterElement.textContent = this.counter;
-        
+
         // Calculate font size based on counter value
         // Mobile: 24px to 120px, Desktop: 32px to 160px (base * 5)
         // Scale up to 1000, then cap at max size
@@ -89,8 +89,22 @@ class CounterGame {
         const maxSize = baseSize * 5;
         const scaleFactor = Math.min(this.counter / 1000, 1);
         const fontSize = baseSize + scaleFactor * (maxSize - baseSize);
-        
+
         this.counterElement.style.fontSize = `${fontSize}px`;
+
+        // Calculate background color transition from blue (#0000FF) to green (#00FF00)
+        // Progress from 0 to 1000, capped at 1
+        const colorProgress = Math.min(this.counter / 1000, 1);
+
+        // Start: #0000FF (blue) - RGB(0, 0, 255)
+        // End: #00FF00 (green) - RGB(0, 255, 0)
+        // Red stays 0, Blue decreases from 255 to 0, Green increases from 0 to 255
+        const red = 0;
+        const green = Math.round(255 * colorProgress);
+        const blue = Math.round(255 * (1 - colorProgress));
+
+        const backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+        document.body.style.background = backgroundColor;
     }
 }
 
