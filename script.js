@@ -6,8 +6,10 @@ class CounterGame {
         this.lastClickTime = 0;
         this.counterElement = document.getElementById('counter');
         this.buttonElement = document.getElementById('gameButton');
+        this.winButtonElement = document.getElementById('winButton');
 
         this.buttonElement.addEventListener('click', () => this.toggleGame());
+        this.winButtonElement.addEventListener('click', () => this.forceWin());
         this.updateDisplay();
     }
 
@@ -58,7 +60,23 @@ class CounterGame {
         }
     }
 
+    forceWin() {
+        // Start the game if not running, or restart if already running
+        if (this.isRunning) {
+            this.stopGame();
+        }
 
+        // Start the game normally
+        this.startGame();
+
+        // Set up automatic stop at exactly 1000
+        const forceWinInterval = setInterval(() => {
+            if (this.counter >= 1000) {
+                clearInterval(forceWinInterval);
+                this.stopGame();
+            }
+        }, 1); // Check every 1ms for precise timing
+    }
 
     updateDisplay() {
         this.counterElement.textContent = this.counter;
