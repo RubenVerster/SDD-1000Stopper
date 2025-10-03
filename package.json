@@ -1,13 +1,24 @@
 {
   "name": "1000stopper",
   "version": "1.0.0",
-  "description": "",
+  "description": "A counter game where you try to stop at exactly 1000",
   "main": "index.js",
+  "homepage": "https://verster.github.io/1000Stopper",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mkdir -p build && cp index.html styles.css script.js build/",
+    "deploy": "gh-pages -d build"
   },
-  "keywords": [],
+  "keywords": [
+    "game",
+    "counter",
+    "timing",
+    "web-game"
+  ],
   "author": "Ruben Verster",
   "license": "MIT",
-  "type": "commonjs"
+  "type": "commonjs",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
 }
